@@ -1,9 +1,11 @@
-Bencode encoding/decoding sub package. Uses similar API design to Go's json package.
+> ⚠️ This is a fork of https://github.com/anacrolix/torrent/tree/master/bencode ⚠️
+
+Bencode encoding/decoding package. Uses similar API design to Go's json package.
 
 ## Install
 
 ```sh
-go get github.com/anacrolix/torrent
+go get github.com/attilabuti/bencode
 ```
 
 ## Usage
@@ -12,27 +14,28 @@ go get github.com/anacrolix/torrent
 package demo
 
 import (
-	bencode "github.com/anacrolix/torrent/bencode"
+	bencode "github.com/attilabuti/bencode"
 )
 
 type Message struct {
-	Query    string `json:"q,omitempty" bencode:"q,omitempty"`
+	Query string `json:"q,omitempty" bencode:"q,omitempty"`
 }
 
 var v Message
 
 func main(){
-	// encode
+	// Encode
 	data, err := bencode.Marshal(v)
 	if err != nil {
 		log.Fatal(err)
 	}
-	
-	//decode
+
+	// Decode
 	err := bencode.Unmarshal(data, &v)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Println(v)
 }
 ```
